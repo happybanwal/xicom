@@ -11,12 +11,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native'
-import { RootStackParamList } from 'src/types/common'
-
-interface ImageItem {
-  xt_image: string
-  id: string
-}
+import { ImageItem, RootStackParamList } from 'src/types/common'
 
 const Login = () => {
   type loginScreenProps = NativeStackNavigationProp<RootStackParamList, 'Login'>
@@ -24,7 +19,6 @@ const Login = () => {
 
   const [data, setData] = useState<ImageItem[]>([])
   const [offset, setOffset] = useState(0)
-  const [loadingMore, setLoadingMore] = useState(false)
 
   const fetchData = async () => {
     const config = {
@@ -55,10 +49,16 @@ const Login = () => {
 
   const renderImageItem: React.FC<{ item: ImageItem }> = useCallback(
     ({ item }) => (
-      <Image
-        source={{ uri: item.xt_image }}
-        style={{ width: '100%', height: 200 }}
-      />
+      <Pressable
+        onPress={() => {
+          navigation.navigate('Details', { data: item.xt_image })
+        }}
+      >
+        <Image
+          source={{ uri: item.xt_image }}
+          style={{ width: '100%', height: 200 }}
+        />
+      </Pressable>
     ),
     []
   )
@@ -80,9 +80,7 @@ const Login = () => {
           data={data}
           renderItem={renderImageItem}
           keyExtractor={(item) => item.id}
-          // keyExtractor={keyExtractor}
           ItemSeparatorComponent={itemSeperator}
-          //   onEndReached={endReached}
           onEndReached={loadMoreImages}
         />
 
