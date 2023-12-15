@@ -15,11 +15,7 @@ const Home = () => {
   const navigation = useNavigation<homeScreenProps>()
   return (
     <View className={`${GlobalClassName.container} ${themeState}`}>
-      <PaperButton
-        mode="contained"
-      >
-        Home
-      </PaperButton>
+      <PaperButton mode="contained">Home</PaperButton>
       <StatusBar style="auto" />
     </View>
   )
