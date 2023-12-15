@@ -103,7 +103,7 @@ const Details = ({ route }: any) => {
             <Text className="w-[40%]">Phone : </Text>
             <TextInput
               className="border-2 w-[60%] p-1"
-              value={firstName}
+              value={phone}
               onChangeText={(text) => {
                 setPhone(text)
               }}
